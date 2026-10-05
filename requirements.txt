@@ -1,0 +1,8 @@
+cvxpy>=1.7.5
+highspy
+matplotlib
+numpy
+pandas
+prophet>=1.2.1
+requests
+seaborn
