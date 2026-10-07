@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from fn_charging_schedule_trading import charging_schedule_trading
-from fn_day_ahead_data import day_ahead_data
+from functions.fn_charging_schedule_trading import charging_schedule_trading
+from functions.fn_day_ahead_data import day_ahead_data
 
 
 def battery_simulation_trading(

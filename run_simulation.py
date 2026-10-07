@@ -1,10 +1,10 @@
 import pandas as pd
-from fn_battery_simulation import battery_simulation
-from fn_battery_simulation_trading import battery_simulation_trading
+from functions.fn_battery_simulation import battery_simulation
+from functions.fn_battery_simulation_trading import battery_simulation_trading
 from pathlib import Path
 from edit_simulation_parameters import simulation_parameters
-from fn_htw_profiles import load_htw_profile
-from fn_download_prices import download_price_files
+from functions.fn_htw_profiles import load_htw_profile
+from functions.fn_download_prices import download_price_files
 
 """
 Load parameters, load the selected HTW load profile, run two battery simulations (AC-coupled system) and save the results:

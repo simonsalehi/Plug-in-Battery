@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-from fn_charging_schedule import charging_schedule
-from fn_load_forecast import prepare_load_training_data, load_forecast
-from fn_day_ahead_data import day_ahead_data
+from functions.fn_charging_schedule import charging_schedule
+from functions.fn_load_forecast import prepare_load_training_data, load_forecast
+from functions.fn_day_ahead_data import day_ahead_data
 
 
 def battery_simulation(

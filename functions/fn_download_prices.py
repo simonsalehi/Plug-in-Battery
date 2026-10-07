@@ -4,6 +4,8 @@ Download monthly day-ahead prices (DE-LU) from the Energy-Charts API.
 The month of each file is taken from its name: energy-charts_day_ahead_2026_3.csv
 is filled with the prices of March 2026. Existing files are skipped.
 
+Run from the project root: python -m functions.fn_download_prices
+
 Data: Bundesnetzagentur | SMARD.de, CC BY 4.0, via Energy-Charts.info (attribution required).
 """
 
