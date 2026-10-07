@@ -189,6 +189,17 @@ Battery power is positive when charging and negative when discharging.
 
 > **Note:** The column `load_power_W` contains the selected HTW Berlin load profile.
 
+## Results
+
+Costs for one year with the current default settings (profile `Pl_43`). Savings are relative to the static tariff.
+
+| Variant | Cost (EUR) | Savings vs. static (EUR) |
+|---------|-----------:|-------------------------:|
+| Static tariff (no battery) | 861.87 | – |
+| Dynamic tariff (no battery) | 859.59 | 2.28 |
+| Dynamic tariff with battery | 802.38 | 59.49 |
+| Dynamic tariff with battery and trading | 784.26 | 77.61 |
+
 ## Notes
 
 - `functions/fn_day_ahead_data.py` ignores the timestamps of the Energy-Charts files and generates a continuous 15 min index starting on January 1st of the year detected automatically from the first price file (first `Datum` value, fallback: file name). The files must therefore be complete and in chronological order.
