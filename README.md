@@ -88,6 +88,28 @@ no further preprocessing or intermediate files are needed.
 
 4. **Select a profile.** Set `htw_profile_number` (1-74) in `edit_simulation_parameters.py`.
 
+### Yearly energy consumption of the profiles
+
+The 15 profiles with the lowest yearly energy consumption, to help choosing `htw_profile_number`:
+
+| `htw_profile_number` | Profile | Yearly energy (kWh) |
+|---------------------:|---------|--------------------:|
+| 6 | `Pl_6` | 1398.9 |
+| 24 | `Pl_24` | 1847.4 |
+| 43 | `Pl_43` | 2296.4 |
+| 51 | `Pl_51` | 2391.9 |
+| 44 | `Pl_44` | 2629.9 |
+| 4 | `Pl_4` | 2663.4 |
+| 7 | `Pl_7` | 2937.9 |
+| 34 | `Pl_34` | 3081.4 |
+| 5 | `Pl_5` | 3196.4 |
+| 16 | `Pl_16` | 3196.7 |
+| 1 | `Pl_1` | 3238.7 |
+| 14 | `Pl_14` | 3259.7 |
+| 10 | `Pl_10` | 3369.7 |
+| 53 | `Pl_53` | 3390.9 |
+| 15 | `Pl_15` | 3402.6 |
+
 When `run_simulation.py` starts, `functions.fn_htw_profiles.load_htw_profile()` reads only the column of the selected
 profile from the three files (chunk by chunk, RAM-friendly) and sums the phases (PL1 + PL2 + PL3). This takes a
 moment, since the raw files are large. The profile is not saved separately: it is stored together with the
