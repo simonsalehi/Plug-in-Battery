@@ -92,23 +92,23 @@ no further preprocessing or intermediate files are needed.
 
 The 15 profiles with the lowest yearly energy consumption, to help choosing `htw_profile_number`:
 
-| `htw_profile_number` | Profile | Yearly energy (kWh) |
-|---------------------:|---------|--------------------:|
-| 6 | `Pl_6` | 1398.9 |
-| 24 | `Pl_24` | 1847.4 |
-| 43 | `Pl_43` | 2296.4 |
-| 51 | `Pl_51` | 2391.9 |
-| 44 | `Pl_44` | 2629.9 |
-| 4 | `Pl_4` | 2663.4 |
-| 7 | `Pl_7` | 2937.9 |
-| 34 | `Pl_34` | 3081.4 |
-| 5 | `Pl_5` | 3196.4 |
-| 16 | `Pl_16` | 3196.7 |
-| 1 | `Pl_1` | 3238.7 |
-| 14 | `Pl_14` | 3259.7 |
-| 10 | `Pl_10` | 3369.7 |
-| 53 | `Pl_53` | 3390.9 |
-| 15 | `Pl_15` | 3402.6 |
+| `htw_profile_number` | Yearly energy (kWh) |
+|---------------------:|--------------------:|
+|                    6 | 1398.9 |
+|                   24 | 1847.4 |
+|                   43 | 2296.4 |
+|                   51 | 2391.9 |
+|                   44 | 2629.9 |
+|                    4 | 2663.4 |
+|                    7 | 2937.9 |
+|                   34 | 3081.4 |
+|                    5 | 3196.4 |
+|                   16 | 3196.7 |
+|                    1 | 3238.7 |
+|                   14 | 3259.7 |
+|                   10 | 3369.7 |
+|                   53 | 3390.9 |
+|                   15 | 3402.6 |
 
 When `run_simulation.py` starts, `functions.fn_htw_profiles.load_htw_profile()` reads only the column of the selected
 profile from the three files (chunk by chunk, RAM-friendly) and sums the phases (PL1 + PL2 + PL3). This takes a
@@ -191,7 +191,7 @@ Battery power is positive when charging and negative when discharging.
 
 ## Results
 
-Costs for one year with the current default settings (profile `Pl_43`). Savings are relative to the static tariff.
+Costs for one year with the current default settings (profile `Pl_43`).
 
 | Variant | Cost (EUR) | Savings vs. static (EUR) |
 |---------|-----------:|-------------------------:|
@@ -208,7 +208,7 @@ Costs for one year with the current default settings (profile `Pl_43`). Savings 
 
 ## License and attribution
 
-- **Code:** see the [LICENSE](LICENSE) file.
+- **Code:** See the [LICENSE](LICENSE) file.
 - **Household load profiles:** HTW Berlin, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), source: [HTW Berlin](https://solar.htw-berlin.de/elektrische-lastprofile-fuer-wohngebaeude/).
 - **Day-ahead prices:** Bundesnetzagentur | SMARD.de, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
   provided by [Energy-Charts.info](https://www.energy-charts.info).
