@@ -5,8 +5,8 @@ electricity cost of a household under:
 
 1. a **static tariff** (no battery)
 2. a **dynamic tariff** (day-ahead price + fixed price component, no battery)
-3. a **dynamic tariff with battery**, optimized against a daily load forecast
-4. a **dynamic tariff with battery and trading**, optimized purely on day-ahead prices (including a service fee)
+3. a **dynamic tariff with battery**, optimized on day-ahead prices and daily load forecast
+4. a **dynamic tariff with battery and trading**, optimized purely on day-ahead prices
 
 ## Data sources
 
@@ -25,14 +25,14 @@ data/
 │   └── PL3.csv
 ├── energy-charts_day_ahead/
 │   └── energy-charts_day_ahead_<year>_<month>.csv   # downloaded automatically; columns: "Datum", "Day Ahead Auktion DE-LU (EUR/MWh)"
-└── results/                               # output directory (must exist)
+└── results/                               # output directory
 ```
 
 The selected load profile is read directly from the raw HTW Berlin files, see [Preparing the HTW Berlin load profiles](#preparing-the-htw-berlin-load-profiles).
 
 ## Project structure
 
-The scripts (`run_simulation.py`, `inspect_results.py`, `edit_simulation_parameters.py`) are in the project root, all function modules (`fn_*.py`) are in the `functions/` folder. Run all commands from the project root.
+The scripts (`run_simulation.py`, `inspect_results.py`, `edit_simulation_parameters.py`) are in the project root, all function modules (`fn_*.py`) are in the `functions/` folder.
 
 | File | Purpose |
 |------|---------|
@@ -63,12 +63,12 @@ no further preprocessing or intermediate files are needed.
 
 > **License:** The HTW Berlin load profiles are licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
 
-1. **Download the zip file.** Open the
+1. **Download the zip file:** Open the
    [HTW Berlin page on electrical load profiles for residential buildings](https://solar.htw-berlin.de/elektrische-lastprofile-fuer-wohngebaeude/)
    and download `CSV_74_Loadprofiles_1s_W_var.zip` (1 s resolution, 74 profiles, one full year).
    The file is large, so make sure enough disk space is available.
 
-2. **Unzip it.** Only three of the extracted files are needed (the three phases of all 74 profiles):
+2. **Unzip it:** Only three of the extracted files are needed (the three phases of all 74 profiles):
 
    - `PL1.csv`
    - `PL2.csv`
@@ -86,7 +86,7 @@ no further preprocessing or intermediate files are needed.
 
    The paths are set in `path_htw_files` in `edit_simulation_parameters.py`. Adjust them if your layout differs.
 
-4. **Select a profile.** Set `htw_profile_number` (1-74) in `edit_simulation_parameters.py`.
+4. **Select a profile:** Set `htw_profile_number` (1-74) in `edit_simulation_parameters.py`.
 
 ### Yearly energy consumption of the profiles
 
@@ -111,9 +111,8 @@ The 15 profiles with the lowest yearly energy consumption, to help choosing `htw
 |                   15 | 3402.6 |
 
 When `run_simulation.py` starts, `functions.fn_htw_profiles.load_htw_profile()` reads only the column of the selected
-profile from the three files (chunk by chunk, RAM-friendly) and sums the phases (PL1 + PL2 + PL3). This takes a
-moment, since the raw files are large. The profile is not saved separately: it is stored together with the
-simulation results in the column `load_power_W`.
+profile from the three files and sums the phases (PL1 + PL2 + PL3). The profile is not saved separately (it is stored together with the
+simulation results in the column `load_power_W`).
 
 ## Day-ahead prices
 
@@ -125,10 +124,9 @@ bidding zone DE-LU) at the start of `run_simulation.py`.
 - Files that already exist are skipped.
 - The API allows 2 requests per minute, so the script waits 30 s between requests.
 - Only complete months can be downloaded.
-- To download without running the simulation: `python -m functions.fn_download_prices`
 
 Data source: Bundesnetzagentur | SMARD.de, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
-provided by [Energy-Charts.info](https://www.energy-charts.info) (attribution required when publishing results).
+provided by [Energy-Charts.info](https://www.energy-charts.info).
 
 ## Usage
 
@@ -158,7 +156,7 @@ Defined in `edit_simulation_parameters.py`:
 | `service_fee` | ct/kWh | Service fee for trading (half applied on charging, half on discharging) |
 | `base_price_dyn`, `base_price_stat` | ct/month | Monthly base price of the respective tariff |
 | `htw_profile_number` | – | Number (1-74) of the HTW Berlin household load profile to simulate |
-| `path_htw_files` | – | The three raw HTW Berlin phase files (`PL1.csv`, `PL2.csv`, `PL3.csv`) |
+| `path_htw_files` | – | The raw HTW Berlin phase files (`PL1.csv`, `PL2.csv`, `PL3.csv`) |
 | `path_price_files` | – | Monthly day-ahead price files in chronological order |
 | `days_training` | days | Length of the load forecast training window (max. 61 days) |
 | `var_e_bat` | Wh | Battery capacity |
@@ -204,9 +202,8 @@ Costs for one year with the current default settings (profile `Pl_43`).
 
 - `functions/fn_day_ahead_data.py` ignores the timestamps of the Energy-Charts files and generates a continuous 15 min index starting on January 1st of the year detected automatically from the first price file (first `Datum` value, fallback: file name). The files must therefore be complete and in chronological order.
 - The load profile is mapped onto the same year, so price and load data are aligned by position, not by their original dates.
-- In the default configuration, the months October to December are taken from the 2025 price files.
 
-## License and attribution
+## License
 
 - **Code:** See the [LICENSE](LICENSE) file.
 - **Household load profiles:** HTW Berlin, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/), source: [HTW Berlin](https://solar.htw-berlin.de/elektrische-lastprofile-fuer-wohngebaeude/).
